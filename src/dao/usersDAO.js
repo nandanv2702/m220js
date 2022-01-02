@@ -47,8 +47,7 @@ export default class UsersDAO {
    */
   static async addUser(userInfo) {
     try {
-
-      await users.insertOne({ ...userInfo })
+      await users.insertOne({ ...userInfo }, { w: "majority" })
 
       return { success: true }
     } catch (e) {
@@ -73,10 +72,10 @@ export default class UsersDAO {
         {
           $set: {
             user_id: email,
-            jwt
-          }
+            jwt,
+          },
         },
-        { upsert: true }
+        { upsert: true },
       )
 
       return { success: true }
@@ -146,20 +145,11 @@ export default class UsersDAO {
    */
   static async updatePreferences(email, preferences) {
     try {
-      /**
-      Ticket: User Preferences
-
-      Update the "preferences" field in the corresponding user's document to
-      reflect the new information in preferences.
-      */
-
       preferences = preferences || {}
 
-      // TODO Ticket: User Preferences
-      // Use the data in "preferences" to update the user's preferences.
       const updateResponse = await users.updateOne(
-        { someField: someValue },
-        { $set: { someOtherField: someOtherValue } },
+        { email },
+        { $set: { preferences: preferences } },
       )
 
       if (updateResponse.matchedCount === 0) {
