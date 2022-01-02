@@ -6,16 +6,13 @@ import CommentsDAO from "./dao/commentsDAO"
 
 const port = process.env.PORT || 8000
 
-MongoClient.connect(
-  process.env.MFLIX_DB_URI,
-  { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true, 
-    poolSize: 50, 
-    wtimeout: 2500,
-    connectTimeoutMS: 10000
-  },
-)
+MongoClient.connect(process.env.MFLIX_DB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  poolSize: 50,
+  wtimeout: 2500,
+  connectTimeoutMS: 10000,
+})
   .catch(err => {
     console.error(err.stack)
     process.exit(1)

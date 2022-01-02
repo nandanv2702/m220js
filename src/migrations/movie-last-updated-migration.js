@@ -20,7 +20,10 @@ require("dotenv").config()
 ;(async () => {
   try {
     const host = process.env.MFLIX_DB_URI
-    const client = await MongoClient.connect(host, { useNewUrlParser: true, useUnifiedTopology: true })
+    const client = await MongoClient.connect(host, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     const mflix = client.db(process.env.MFLIX_NS)
 
     // TODO: Create the proper predicate and projection

@@ -2,10 +2,12 @@ const MongoClient = require("mongodb").MongoClient
 const faker = require("faker")
 require("dotenv").config()
 ;(async function() {
-  const client = await MongoClient.connect(
-    process.env.MFLIX_DB_URI,
-    { wtimeout: 2500, poolSize: 50, useNewUrlParser: true, useUnifiedTopology: true },
-  )
+  const client = await MongoClient.connect(process.env.MFLIX_DB_URI, {
+    wtimeout: 2500,
+    poolSize: 50,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
 
   /**
     In this lesson, we're going to use change streams to track real-time
