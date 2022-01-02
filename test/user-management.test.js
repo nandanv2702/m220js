@@ -33,7 +33,7 @@ describe("User Management", () => {
 
     // we should be able to get the user
     const user = await UsersDAO.getUser(testUser.email)
-    // for comparison, we delete the _id key returned from Mongo
+
     delete user._id
     expect(user).toEqual(testUser)
   })
